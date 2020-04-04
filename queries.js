@@ -145,6 +145,7 @@ Sql.prototype.setEmployeeRole = function(updatedEmployee){
 }
 // END setEmployeeRole function
 
+
 // START selectDepartment function - view all rows in department table
 Sql.prototype.selectDepartment = function(){
 
