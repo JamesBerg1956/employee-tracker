@@ -49,7 +49,7 @@ Sql.prototype.insertDepartment = function(deptartment){
             // if query errors, throw the error
             if (err) throw err;
             // if query is successfull, notify to console
-            console.log(res.affectedRows + "department inserted. \n");
+            console.log(res.affectedRows + " department inserted. \n");
         }
 
     );
@@ -76,7 +76,7 @@ Sql.prototype.insertRole = function(role){
             // if query errors, throw the error
             if (err) throw err;
             // if query is successfull, notify to console
-            console.log(res.affectedRows + "role inserted. \n");
+            console.log(res.affectedRows + " role inserted. \n");
         }
 
     );
@@ -88,7 +88,30 @@ Sql.prototype.insertRole = function(role){
 // END insertRole function
 
 // START insertEmployee function - insert new row to employees table
+Sql.prototype.insertEmployee = function(employee){
+    // notify console that insert is occurring
+    console.log("Inserting a new employee... \n");
 
+    //create query object
+    var query = connection.query(
+
+        // define parameterized query
+        "INSERT INTO employee SET ?", employee,
+        
+        // callback function for query
+        function(err, res){
+            // if query errors, throw the error
+            if (err) throw err;
+            // if query is successfull, notify to console
+            console.log(res.affectedRows + " employee inserted.\n");
+        }
+
+    );
+
+    // notify to console the query used
+    console.log(query.sql);
+
+}
 // END insertEmployee function
 
 // START selectDepartment function - view all rows in department table
