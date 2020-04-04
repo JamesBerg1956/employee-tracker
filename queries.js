@@ -33,28 +33,58 @@ Sql.prototype.connectToDb = function(){
 // END connectToDb function
 
 // START insertDepartment function - insert new row to department table
-Sql.prototype.insertDepartment = function(deptName){
+Sql.prototype.insertDepartment = function(deptartment){
+    
     // notify console that insert is occurring
     console.log("Inserting a new department... \n");
+
     //create query object
     var query = connection.query(
+
         // define parameterized query
-        "INSERT INTO department SET ?", {name: deptName},
+        "INSERT INTO department SET ?", department,
+
         // callback function for query
         function(err, res){
             // if query errors, throw the error
             if (err) throw err;
             // if query is successfull, notify to console
-            console.log(res.affectedRows + "department inserted.\n");
+            console.log(res.affectedRows + "department inserted. \n");
         }
+
     );
+
     // notify to console the query used
     console.log(query.sql);
+
 };
 // END insertDepartment function
 
 // START insertRole function - insert new row to role table
+Sql.prototype.insertRole = function(role){
+    // notify console that insert is occurring
+    console.log("Inserting a new role... \n");
 
+    //create query object
+    var query = connection.query(
+
+        // define parameterized query
+        "INSERT INTO role SET ?", role,
+        
+        // callback function for query
+        function(err, res){
+            // if query errors, throw the error
+            if (err) throw err;
+            // if query is successfull, notify to console
+            console.log(res.affectedRows + "role inserted. \n");
+        }
+
+    );
+
+    // notify to console the query used
+    console.log(query.sql);
+
+}
 // END insertRole function
 
 // START insertEmployee function - insert new row to employees table
