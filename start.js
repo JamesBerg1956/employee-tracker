@@ -11,19 +11,19 @@ sql.connectToDb();
 /*-------------- START QUESTION OBJECT ARRAYS -----------------*/
 
 // questions for promptMainMenu() function
-const arrObjMainMenuQuestions = [{}];
+let arrObjMainMenuQuestions = [{}];
 
 // questions for promptAddDepartment() function
-const arrObjAddDepartmentQuestions = [{}];
+let arrObjAddDepartmentQuestions = [{}];
 
 // questions for promptAddRole() function
-const arrObjAddRoleQuestions = [{}];
+let arrObjAddRoleQuestions = [{}];
 
 // questions for promptAddEmployee() function
-const arrObjAddEmployeeQuestions = [{}];
+let arrObjAddEmployeeQuestions = [{}];
 
 // questions for promptUpdateEmployeeRole() function
-const arrObjUpdateEmployeeRoleQuestions = [{}]
+let arrObjUpdateEmployeeRoleQuestions = [{}]
 
 /*-------------- END QUESTION OBJECT ARRAYS -------------------*/
 
