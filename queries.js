@@ -223,7 +223,6 @@ Sql.prototype.selectRole = function(){
 // END selectRole function
 
 // START selectEmployee function - view all employees and related information
-// TODO: get first_name + " " + last_name as Manager from manager_id
 Sql.prototype.selectEmployee = function(){
 
     // notify console that select is occurring
@@ -233,7 +232,7 @@ Sql.prototype.selectEmployee = function(){
     var query = connection.query(
       
     // define query
-    "SELECT first_name, last_name, role.title as 'role' FROM employee INNER JOIN role ON employee.role_id = role.id", 
+    "SELECT emp.first_name, emp.last_name, rl.title as 'role', CONCAT(mng.first_name, ' ', mng.last_name) as 'Manager' FROM employee as emp INNER JOIN role as rl ON emp.role_id = rl.id INNER JOIN employee as mng ON emp.manager_id = mng.id", 
     
     // callback function for query
     function(err, res){
