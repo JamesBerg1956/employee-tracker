@@ -162,8 +162,6 @@ Sql.prototype.selectDepartment = function(){
     function(err, res){
         // if query errors, throw the error
         if (err) throw err;
-
-        // display table
         console.table(res);
     });
 

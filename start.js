@@ -28,20 +28,6 @@ let arrObjUpdateEmployeeRoleQuestions = [{}]
 /*-------------- END QUESTION OBJECT ARRAYS -------------------*/
 
 
-/*---------------- START DATA OBJECTS ARRAYS ------------------*/
-
-// object array of current departments
-const arrObjDepartments = [{}];
-
-// object array of current roles joined with departments
-const arrObjRoles = [{}];
-
-// object array of current employees joined with roles
-const arrObjEmployees = [{}];
-
-/*---------------- END DATA ARRAY OBJECTS ARRAYS ---------------------*/
-
-
 /*------------ START INQUIRER FUNCTIONS ------------------*/
 
 // START promptMainMenu function - prompt for commands
@@ -89,9 +75,11 @@ function getTitleAscii() {
 
 // START viewDepartments function - calls sql and renders department data
 function viewDepartments(){
-
+    // call sql and get department data
+    sql.selectDepartment();
 }
 // END viewDepartments function
+viewDepartments();
 
 // START viewRoles function - calls sql and renders role data
 function viewRoles(){
@@ -134,6 +122,7 @@ function addEmployee(newEmployee){
 // START updateEmployeeRole function - calls sql and calls viewEmployees()
 function updateEmployeeRole(newRole, employee_id){
 
+
 }
 // END updateEmployeeRole function
 
@@ -141,25 +130,3 @@ function updateEmployeeRole(newRole, employee_id){
 
 /*------------- END FETCH SQL FUNCTIONS ----------------*/
 
-
-/*-------- START CREATE OBJECT ARRAY FUNCTION ----------*/
-
-// START createDepartmentObjectArray function - create and return
-function createDepartmentObjectArray(){
-
-}
-// END createDepartmentObjectArray function
-
-// START create createRoleObjectArray function - create and return
-function createRoleObjectArray(){
-
-}
-// END create createRoleObjectArray function
-
-// START createEmployeeObjectArray function - create and return
-function createEmployeeObjectArray(){
-
-}
-// END createEmployeeObjectArray function
-
-/*-------- END CREATE OBJECT ARRAY FUNCTION ----------*/
