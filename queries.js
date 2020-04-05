@@ -43,6 +43,7 @@ Sql.prototype.connectToDb = function(){
 // START insertDepartment function - insert new row to department table
 Sql.prototype.insertDepartment = function(department){
      
+    // START promise to perform async operations
     var promise = new Promise(function(resolve, reject){
 
         // notify console that insert is occurring
@@ -54,43 +55,59 @@ Sql.prototype.insertDepartment = function(department){
         // define parameterized query
         "INSERT INTO department SET ?", department,
 
-        // callback function for query
+        // START callback function for query
         function(err, res){
+
             // if query errors, throw the error
             if (err) throw err;
+
             // if query is successfull, notify to console
             resolve(res.affectedRows + " department inserted. \n");
+
         });
+        // END callback function for query
 
     });
+    // END promise to perform async operations
 
+    // return promise to perform async operations
     return promise;
 
 };
 // END insertDepartment function
 
 // START insertRole function - insert new row to role table
-// TODO: promisify
 Sql.prototype.insertRole = function(role){
-    // notify console that insert is occurring
-    console.log("Inserting a new role... \n");
 
-    //create query object
-    var query = connection.query(
+    // START promise to perform async operations
+    var promise = new Promise(function(resolve, reject){
 
-    // define parameterized query
-    "INSERT INTO role SET ?", role,
-    
-    // callback function for query
-    function(err, res){
+        // notify console that insert is occurring
+        console.log("Inserting a new role... \n");
 
-        // if query errors, throw the error
-        if (err) throw err;
+        //create query object
+        var query = connection.query(
 
-        // if query is successfull, notify to console
-        console.log(res.affectedRows + " role inserted. \n");
+        // define parameterized query
+        "INSERT INTO role SET ?", role,
+        
+        // START callback function for query
+        function(err, res){
+
+            // if query errors, throw the error
+            if (err) throw err;
+
+            // if query is successfull, notify to console
+            resolve(res.affectedRows + " role inserted. \n");
+
+        });
+        // END callback function for query
 
     });
+    // END promise to perform async operations
+
+    // return promise to perform async operations
+    return promise;
 
 }
 // END insertRole function

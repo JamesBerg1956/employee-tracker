@@ -102,7 +102,7 @@ function viewEmployees(){
 
 /////// START ADD FUNCTIONS ///////////
 
-// START addDepartment function - param object array [{name: value}]
+// START addDepartment function - [{name:string}]
 function addDepartment(newDepartment){
     
     // get promise to call sql
@@ -110,7 +110,7 @@ function addDepartment(newDepartment){
             
     // call promise
     addDepartmentPromise
-    // promise callback
+    // START promise callback
     .then(function(result){
         
         // print result from promise - 1 department inserted
@@ -118,13 +118,32 @@ function addDepartment(newDepartment){
 
         // print updated table to console
         viewDepartments();
+
     });
+    // END promise callback
     
 }
 // END addDepartment function
 
-// START addRole function - calls sql and calls viewRoles()
+// START addRole function - [{title:string,salary:int,department_id: number}]
 function addRole(newRole){
+
+    // get promise to call sql
+    const addRolePromise = sql.insertRole(newRole);
+
+    //call promise
+    addRolePromise
+    // START promise callback
+    .then(function (result){
+
+        // print result from promise - 1 role inserted
+        console.log(result);
+
+        // print updated table to console
+        viewRoles();
+
+    });
+    // END promise callback
 
 }
 // END addRole function
