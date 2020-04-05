@@ -40,7 +40,7 @@ Sql.prototype.connectToDb = function(){
 };
 // END connectToDb function
 
-// START insertDepartment function - insert new row to department table
+// START insertDepartment function - [{name:string}]
 Sql.prototype.insertDepartment = function(department){
      
     // START promise to perform async operations
@@ -76,7 +76,7 @@ Sql.prototype.insertDepartment = function(department){
 };
 // END insertDepartment function
 
-// START insertRole function - insert new row to role table
+// START insertRole function - [{title:string,salary:int,department_id: number}]
 Sql.prototype.insertRole = function(role){
 
     // START promise to perform async operations
@@ -112,7 +112,7 @@ Sql.prototype.insertRole = function(role){
 }
 // END insertRole function
 
-// START insertEmployee function - insert new row to employees table
+// START insertEmployee function - [{first_name:string,last_name:string,role_id:int,manager_id:int}]
 Sql.prototype.insertEmployee = function(employee){
     
     // START promise to perform async operations
@@ -148,57 +148,79 @@ Sql.prototype.insertEmployee = function(employee){
 }
 // END insertEmployee function
 
-// START setEmployeeRole function - updates role property of a given row in employee table
-// TODO: promisify
-Sql.prototype.setEmployeeRole = function(updatedEmployee){
+// START setEmployeeRole function - [{role_id: int}, {id: int}]
+Sql.prototype.setEmployeeRole = function(RoleIdId){
 
-    // notify console that select is occurring
-    console.log("Updating employee... \n");
+    // START promise to perform async operations
+    var promise = new Promise(function(resolve, reject){
 
-    // create query object
-    var query = connection.query(
+        // notify console that select is occurring
+        console.log("Updating employee... \n");
 
-    // define query ?  ? = [{role_id: x}, {id: y}]
-    "UPDATE employee SET ? WHERE ?", updatedEmployee,
+        // create query object
+        var query = connection.query(
 
-    // query callback function
-    function(err, res){
+        // define query ?  ? = [{role_id: int}, {id: int}]
+        "UPDATE employee SET ? WHERE ?", RoleIdId,
 
-        // if sql errors, throw error
-        if(err) throw err;
+        // query callback function
+        function(err, res){
 
-        // notify terminal that update was a success
-        console.log(res.affectedRows + " employees updated.\n")
+            // if sql errors, throw error
+            if(err) throw err;
+
+            // notify terminal that update was a success
+            resolve(res.affectedRows + " employee updated.\n");
+
+        });
 
     });
+    // END promise to perform async operations
+
+    return promise;
 
 }
 // END setEmployeeRole function
 
 
-// START selectDepartment function - view all rows in department table
+// START selectDepartment function - no args
 Sql.prototype.selectDepartment = function(){
 
-    // notify console that select is occurring
-    console.log("Selecting all departments... \n");
+    // START promise to perform async operations
+    var promise = new Promise(function(resolve, reject){
 
-    //create query object
-    var query = connection.query(
-      
-    // define query
-    "SELECT name FROM department", 
-    
-    // callback function for query
-    function(err, res){
-        // if query errors, throw the error
-        if (err) throw err;
-        console.table(res);
+        // notify console that select is occurring
+        console.log("Selecting all departments... \n");
+
+        //create query object
+        var query = connection.query(
+        
+        // define query
+        "SELECT name FROM department", 
+        
+        // START callback function for query
+        function(err, res){
+
+            // if query errors, throw the error
+            if (err) throw err;
+
+            // resolve response
+            resolve(res);
+
+        });
+        // END callback function for query
+
     });
+    // END promise to perform async operations
+
+    // return promise
+    return promise;
 
 }
 // END selectDepartment function
 
-// START selectRole function - view all rows in role table
+// START selectRole function - no args
+// TODO: promisify
 Sql.prototype.selectRole = function(){
 
     // notify console that select is occurring
@@ -222,7 +244,8 @@ Sql.prototype.selectRole = function(){
 }
 // END selectRole function
 
-// START selectEmployee function - view all employees and related information
+// START selectEmployee function - no args
+// TODO: promisify
 Sql.prototype.selectEmployee = function(){
 
     // notify console that select is occurring

@@ -73,16 +73,25 @@ function getTitleAscii() {
 
 //////// START VIEW FUNCTIONS /////////
 
-// START viewDepartments function - calls sql and renders department data
-// TODO: promisify
+// START viewDepartments function - no args
 function viewDepartments(){
-    // call sql and print table to console
-    sql.selectDepartment();
+    // get promise to call sql
+    var selectDepartmentsPromise = sql.selectDepartment();
+
+    // call promise
+    selectDepartmentsPromise
+    .then(function(result){
+
+        // print sql result to console as a table
+        console.table(result);
+
+    })
+
 }
 // END viewDepartments function
 
 
-// START viewRoles function - calls sql and renders role data
+// START viewRoles function - no args
 // TODO: promisify
 function viewRoles(){
     // call sql and print table to console
@@ -90,7 +99,7 @@ function viewRoles(){
 }
 // END viewRoles function
 
-// START viewEmployees function - calls sql and renders employee data
+// START viewEmployees function - no args
 // TODO: promisify
 function viewEmployees(){
     // call sql and print table to console
@@ -154,7 +163,7 @@ function addEmployee(newEmployee){
     // get promise to call sql
     const addEmployeePromise = sql.insertEmployee(newEmployee);
 
-    //call promise
+    // call promise
     addEmployeePromise
     // START promise callback
     .then(function (result){
@@ -175,9 +184,25 @@ function addEmployee(newEmployee){
 
 ////// START UPDATE FUNCTIONS ////////
 
-// START updateEmployeeRole function - calls sql and calls viewEmployees()
-function updateEmployeeRole(newRole, employee_id){
+// START updateEmployeeRole function - [{role_id: int}, {id: int}]
+function updateEmployeeRole(RoleIdId){
 
+    // get promise to call sql
+    const setEmployeeRolePromise = sql.setEmployeeRole();
+
+    // call promise
+    setEmployeeRolePromise
+    // START promise callback
+    .then(function (result){
+
+        // print result from promise - 1 employee updated
+        console.log(result);
+
+        // print updated table to console
+        viewEmployees();
+
+    });
+    // END promise callback
 
 }
 // END updateEmployeeRole function
