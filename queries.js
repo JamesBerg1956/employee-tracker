@@ -42,33 +42,35 @@ Sql.prototype.connectToDb = function(){
 
 // START insertDepartment function - insert new row to department table
 Sql.prototype.insertDepartment = function(department){
-    
-    // notify console that insert is occurring
-    console.log("Inserting a new department... \n");
+     
+    var promise = new Promise(function(resolve, reject){
 
-    //create query object
-    var query = connection.query(
+        // notify console that insert is occurring
+        console.log("Inserting a new department... \n");
 
-    // define parameterized query
-    "INSERT INTO department SET ?", department,
+        //create query object
+        var query = connection.query(
 
-    // callback function for query
-    function(err, res){
-        // if query errors, throw the error
-        if (err) throw err;
+        // define parameterized query
+        "INSERT INTO department SET ?", department,
 
-        // if query is successfull, notify to console
-        console.log(res.affectedRows + " department inserted. \n");
+        // callback function for query
+        function(err, res){
+            // if query errors, throw the error
+            if (err) throw err;
+            // if query is successfull, notify to console
+            resolve(res.affectedRows + " department inserted. \n");
+        });
 
     });
 
-    // notify to console the query used
-    console.log(query.sql);
+    return promise;
 
 };
 // END insertDepartment function
 
 // START insertRole function - insert new row to role table
+// TODO: promisify
 Sql.prototype.insertRole = function(role){
     // notify console that insert is occurring
     console.log("Inserting a new role... \n");
@@ -94,6 +96,7 @@ Sql.prototype.insertRole = function(role){
 // END insertRole function
 
 // START insertEmployee function - insert new row to employees table
+// TODO: promisify
 Sql.prototype.insertEmployee = function(employee){
     
     // notify console that insert is occurring
@@ -120,6 +123,7 @@ Sql.prototype.insertEmployee = function(employee){
 // END insertEmployee function
 
 // START setEmployeeRole function - updates role property of a given row in employee table
+// TODO: promisify
 Sql.prototype.setEmployeeRole = function(updatedEmployee){
 
     // notify console that select is occurring

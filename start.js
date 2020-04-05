@@ -74,21 +74,26 @@ function getTitleAscii() {
 //////// START VIEW FUNCTIONS /////////
 
 // START viewDepartments function - calls sql and renders department data
+// TODO: promisify
 function viewDepartments(){
-    // call sql and get department data
+    // call sql and print table to console
     sql.selectDepartment();
 }
 // END viewDepartments function
 
 
 // START viewRoles function - calls sql and renders role data
+// TODO: promisify
 function viewRoles(){
+    // call sql and print table to console
     sql.selectRole();
 }
 // END viewRoles function
 
 // START viewEmployees function - calls sql and renders employee data
+// TODO: promisify
 function viewEmployees(){
+    // call sql and print table to console
     sql.selectEmployee();
 }
 // END viewEmployees function
@@ -97,9 +102,24 @@ function viewEmployees(){
 
 /////// START ADD FUNCTIONS ///////////
 
-// START addDepartment function - calls sql and calls viewDepartments()
+// START addDepartment function - param object array [{name: value}]
 function addDepartment(newDepartment){
+    
+    // get promise to call sql
+    var addDepartmentPromise = sql.insertDepartment(newDepartment);
+            
+    // call promise
+    addDepartmentPromise
+    // promise callback
+    .then(function(result){
+        
+        // print result from promise - 1 department inserted
+        console.log(result);
 
+        // print updated table to console
+        viewDepartments();
+    });
+    
 }
 // END addDepartment function
 
