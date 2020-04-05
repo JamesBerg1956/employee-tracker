@@ -113,28 +113,37 @@ Sql.prototype.insertRole = function(role){
 // END insertRole function
 
 // START insertEmployee function - insert new row to employees table
-// TODO: promisify
 Sql.prototype.insertEmployee = function(employee){
     
-    // notify console that insert is occurring
-    console.log("Inserting a new employee... \n");
+    // START promise to perform async operations
+    var promise = new Promise(function(resolve, reject){
 
-    //create query object
-    var query = connection.query(
+        // notify console that insert is occurring
+        console.log("Inserting a new employee... \n");
 
-    // define parameterized query
-    "INSERT INTO employee SET ?", employee,
-    
-    // callback function for query
-    function(err, res){
+        //create query object
+        var query = connection.query(
 
-        // if query errors, throw the error
-        if (err) throw err;
+        // define parameterized query
+        "INSERT INTO employee SET ?", employee,
+        
+        // START callback function for query
+        function(err, res){
 
-        // if query is successfull, notify to console
-        console.log(res.affectedRows + " employee inserted.\n");
+            // if query errors, throw the error
+            if (err) throw err;
+
+            // if query is successfull, notify to console
+            resolve(res.affectedRows + " employee inserted.\n");
+
+        });
+        // END callback function for query
 
     });
+    // END promise to perform async operations
+
+    // return promise to perform async operations
+    return promise;
 
 }
 // END insertEmployee function
@@ -214,6 +223,7 @@ Sql.prototype.selectRole = function(){
 // END selectRole function
 
 // START selectEmployee function - view all employees and related information
+// TODO: get first_name + " " + last_name as Manager from manager_id
 Sql.prototype.selectEmployee = function(){
 
     // notify console that select is occurring

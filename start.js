@@ -148,8 +148,25 @@ function addRole(newRole){
 }
 // END addRole function
 
-// START addEmployee function - calls sql and calls viewEmployees()
+// START addEmployee function - [{first_name:string,last_name:string,role_id:int,manager_id:int}]
 function addEmployee(newEmployee){
+
+    // get promise to call sql
+    const addEmployeePromise = sql.insertEmployee(newEmployee);
+
+    //call promise
+    addEmployeePromise
+    // START promise callback
+    .then(function (result){
+
+        // print result from promise - 1 role inserted
+        console.log(result);
+
+        // print updated table to console
+        viewEmployees();
+
+    });
+    // END promise callback
 
 }
 // END addEmployee function
