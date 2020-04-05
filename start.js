@@ -74,21 +74,26 @@ function getTitleAscii() {
 //////// START VIEW FUNCTIONS /////////
 
 // START viewDepartments function - calls sql and renders department data
+// TODO: promisify
 function viewDepartments(){
-    // call sql and get department data
+    // call sql and print table to console
     sql.selectDepartment();
 }
 // END viewDepartments function
 
 
 // START viewRoles function - calls sql and renders role data
+// TODO: promisify
 function viewRoles(){
+    // call sql and print table to console
     sql.selectRole();
 }
 // END viewRoles function
 
 // START viewEmployees function - calls sql and renders employee data
+// TODO: promisify
 function viewEmployees(){
+    // call sql and print table to console
     sql.selectEmployee();
 }
 // END viewEmployees function
@@ -97,20 +102,71 @@ function viewEmployees(){
 
 /////// START ADD FUNCTIONS ///////////
 
-// START addDepartment function - calls sql and calls viewDepartments()
+// START addDepartment function - [{name:string}]
 function addDepartment(newDepartment){
+    
+    // get promise to call sql
+    var addDepartmentPromise = sql.insertDepartment(newDepartment);
+            
+    // call promise
+    addDepartmentPromise
+    // START promise callback
+    .then(function(result){
+        
+        // print result from promise - 1 department inserted
+        console.log(result);
 
+        // print updated table to console
+        viewDepartments();
+
+    });
+    // END promise callback
+    
 }
 // END addDepartment function
 
-// START addRole function - calls sql and calls viewRoles()
+// START addRole function - [{title:string,salary:int,department_id: number}]
 function addRole(newRole){
+
+    // get promise to call sql
+    const addRolePromise = sql.insertRole(newRole);
+
+    //call promise
+    addRolePromise
+    // START promise callback
+    .then(function (result){
+
+        // print result from promise - 1 role inserted
+        console.log(result);
+
+        // print updated table to console
+        viewRoles();
+
+    });
+    // END promise callback
 
 }
 // END addRole function
 
-// START addEmployee function - calls sql and calls viewEmployees()
+// START addEmployee function - [{first_name:string,last_name:string,role_id:int,manager_id:int}]
 function addEmployee(newEmployee){
+
+    // get promise to call sql
+    const addEmployeePromise = sql.insertEmployee(newEmployee);
+
+    //call promise
+    addEmployeePromise
+    // START promise callback
+    .then(function (result){
+
+        // print result from promise - 1 role inserted
+        console.log(result);
+
+        // print updated table to console
+        viewEmployees();
+
+    });
+    // END promise callback
 
 }
 // END addEmployee function

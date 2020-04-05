@@ -42,53 +42,72 @@ Sql.prototype.connectToDb = function(){
 
 // START insertDepartment function - insert new row to department table
 Sql.prototype.insertDepartment = function(department){
-    
-    // notify console that insert is occurring
-    console.log("Inserting a new department... \n");
+     
+    // START promise to perform async operations
+    var promise = new Promise(function(resolve, reject){
 
-    //create query object
-    var query = connection.query(
+        // notify console that insert is occurring
+        console.log("Inserting a new department... \n");
 
-    // define parameterized query
-    "INSERT INTO department SET ?", department,
+        //create query object
+        var query = connection.query(
 
-    // callback function for query
-    function(err, res){
-        // if query errors, throw the error
-        if (err) throw err;
+        // define parameterized query
+        "INSERT INTO department SET ?", department,
 
-        // if query is successfull, notify to console
-        console.log(res.affectedRows + " department inserted. \n");
+        // START callback function for query
+        function(err, res){
+
+            // if query errors, throw the error
+            if (err) throw err;
+
+            // if query is successfull, notify to console
+            resolve(res.affectedRows + " department inserted. \n");
+
+        });
+        // END callback function for query
 
     });
+    // END promise to perform async operations
 
-    // notify to console the query used
-    console.log(query.sql);
+    // return promise to perform async operations
+    return promise;
 
 };
 // END insertDepartment function
 
 // START insertRole function - insert new row to role table
 Sql.prototype.insertRole = function(role){
-    // notify console that insert is occurring
-    console.log("Inserting a new role... \n");
 
-    //create query object
-    var query = connection.query(
+    // START promise to perform async operations
+    var promise = new Promise(function(resolve, reject){
 
-    // define parameterized query
-    "INSERT INTO role SET ?", role,
-    
-    // callback function for query
-    function(err, res){
+        // notify console that insert is occurring
+        console.log("Inserting a new role... \n");
 
-        // if query errors, throw the error
-        if (err) throw err;
+        //create query object
+        var query = connection.query(
 
-        // if query is successfull, notify to console
-        console.log(res.affectedRows + " role inserted. \n");
+        // define parameterized query
+        "INSERT INTO role SET ?", role,
+        
+        // START callback function for query
+        function(err, res){
+
+            // if query errors, throw the error
+            if (err) throw err;
+
+            // if query is successfull, notify to console
+            resolve(res.affectedRows + " role inserted. \n");
+
+        });
+        // END callback function for query
 
     });
+    // END promise to perform async operations
+
+    // return promise to perform async operations
+    return promise;
 
 }
 // END insertRole function
@@ -96,30 +115,41 @@ Sql.prototype.insertRole = function(role){
 // START insertEmployee function - insert new row to employees table
 Sql.prototype.insertEmployee = function(employee){
     
-    // notify console that insert is occurring
-    console.log("Inserting a new employee... \n");
+    // START promise to perform async operations
+    var promise = new Promise(function(resolve, reject){
 
-    //create query object
-    var query = connection.query(
+        // notify console that insert is occurring
+        console.log("Inserting a new employee... \n");
 
-    // define parameterized query
-    "INSERT INTO employee SET ?", employee,
-    
-    // callback function for query
-    function(err, res){
+        //create query object
+        var query = connection.query(
 
-        // if query errors, throw the error
-        if (err) throw err;
+        // define parameterized query
+        "INSERT INTO employee SET ?", employee,
+        
+        // START callback function for query
+        function(err, res){
 
-        // if query is successfull, notify to console
-        console.log(res.affectedRows + " employee inserted.\n");
+            // if query errors, throw the error
+            if (err) throw err;
+
+            // if query is successfull, notify to console
+            resolve(res.affectedRows + " employee inserted.\n");
+
+        });
+        // END callback function for query
 
     });
+    // END promise to perform async operations
+
+    // return promise to perform async operations
+    return promise;
 
 }
 // END insertEmployee function
 
 // START setEmployeeRole function - updates role property of a given row in employee table
+// TODO: promisify
 Sql.prototype.setEmployeeRole = function(updatedEmployee){
 
     // notify console that select is occurring
@@ -193,6 +223,7 @@ Sql.prototype.selectRole = function(){
 // END selectRole function
 
 // START selectEmployee function - view all employees and related information
+// TODO: get first_name + " " + last_name as Manager from manager_id
 Sql.prototype.selectEmployee = function(){
 
     // notify console that select is occurring
