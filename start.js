@@ -79,11 +79,11 @@ function viewDepartments(){
     sql.selectDepartment();
 }
 // END viewDepartments function
-viewDepartments();
+
 
 // START viewRoles function - calls sql and renders role data
 function viewRoles(){
-
+    sql.selectRole();
 }
 // END viewRoles function
 
