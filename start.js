@@ -89,7 +89,7 @@ function viewRoles(){
 
 // START viewEmployees function - calls sql and renders employee data
 function viewEmployees(){
-
+    sql.selectEmployee();
 }
 // END viewEmployees function
 
