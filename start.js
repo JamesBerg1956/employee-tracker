@@ -75,35 +75,65 @@ function getTitleAscii() {
 
 // START viewDepartments function - no args
 function viewDepartments(){
+    
     // get promise to call sql
     var selectDepartmentsPromise = sql.selectDepartment();
 
     // call promise
     selectDepartmentsPromise
+
+    // START promise callback
     .then(function(result){
 
         // print sql result to console as a table
         console.table(result);
 
-    })
+    });
+    // END promise callback
 
 }
 // END viewDepartments function
 
 
 // START viewRoles function - no args
-// TODO: promisify
 function viewRoles(){
-    // call sql and print table to console
-    sql.selectRole();
+
+    // get promise to call sql
+    var selectRolesPromise = sql.selectRole();
+
+    // call promise
+    selectRolesPromise
+
+    // START promise callback
+    .then(function(result){
+
+        // print sql result to console as a table
+        console.table(result);
+
+    });
+    // END promise callback
+
 }
 // END viewRoles function
 
 // START viewEmployees function - no args
-// TODO: promisify
 function viewEmployees(){
-    // call sql and print table to console
-    sql.selectEmployee();
+
+    // get promise to call sql
+    var selectEmployeePromise = sql.selectEmployee();
+
+    // call promise
+    selectEmployeePromise
+
+    // START promise callback
+    .then(function(result){
+
+        // print sql result to console as a table
+        console.table(result);
+
+    });
+    // END promise callback
+
 }
 // END viewEmployees function
 

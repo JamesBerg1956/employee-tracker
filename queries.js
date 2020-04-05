@@ -220,51 +220,73 @@ Sql.prototype.selectDepartment = function(){
 // END selectDepartment function
 
 // START selectRole function - no args
-// TODO: promisify
 Sql.prototype.selectRole = function(){
 
-    // notify console that select is occurring
-    console.log("Selecting all roles... \n");
+    // START promise to perform async operations
+    var promise = new Promise(function(resolve, reject){
 
-    //create query object
-    var query = connection.query(
-      
-    // define query
-    "SELECT title, salary, department.name as department FROM role INNER JOIN department ON role.department_id = department.id", 
-    
-    // callback function for query
-    function(err, res){
-        // if query errors, throw the error
-        if (err) throw err;
+        // notify console that select is occurring
+        console.log("Selecting all roles... \n");
 
-        // display table
-        console.table(res);
+        //create query object
+        var query = connection.query(
+        
+        // define query
+        "SELECT title, salary, department.name as department FROM role INNER JOIN department ON role.department_id = department.id", 
+        
+        // START callback function for query
+        function(err, res){
+
+            // if query errors, throw the error
+            if (err) throw err;
+
+            // resolve response
+            resolve(res);
+
+        });
+        // END callback function for query
+
     });
+    // END promise to perform async operations
+
+    // return promise
+    return promise;
 
 }
 // END selectRole function
 
 // START selectEmployee function - no args
-// TODO: promisify
 Sql.prototype.selectEmployee = function(){
 
-    // notify console that select is occurring
-    console.log("Selecting all employees... \n");
+    // START promise to perform async operations
+    var promise = new Promise(function(resolve, reject){
 
-    //create query object
-    var query = connection.query(
-      
-    // define query
-    "SELECT emp.first_name, emp.last_name, rl.title as 'role', CONCAT(mng.first_name, ' ', mng.last_name) as 'Manager' FROM employee as emp INNER JOIN role as rl ON emp.role_id = rl.id INNER JOIN employee as mng ON emp.manager_id = mng.id", 
-    
-    // callback function for query
-    function(err, res){
-        // if query errors, throw the error
-        if (err) throw err;
+        // notify console that select is occurring
+        console.log("Selecting all employees... \n");
 
-        // display table
-        console.table(res);
+        //create query object
+        var query = connection.query(
+        
+        // define query
+        "SELECT emp.first_name, emp.last_name, rl.title as 'role', CONCAT(mng.first_name, ' ', mng.last_name) as 'Manager' FROM employee as emp INNER JOIN role as rl ON emp.role_id = rl.id INNER JOIN employee as mng ON emp.manager_id = mng.id", 
+        
+        // START callback function for query
+        function(err, res){
+
+            // if query errors, throw the error
+            if (err) throw err;
+
+            // resolve response
+            resolve(res);
+
+        });
+        // END callback function for query
+
     });
+    // END promise to perform async operations
+
+    // return promise
+    return promise;
     
 }
 // END selectEmployee function
