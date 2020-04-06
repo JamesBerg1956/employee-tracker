@@ -1,39 +1,12 @@
 // import queries package
 const sql = require("./db.js");
+const questions = require("./questions.js")
 const inquirer = require("inquirer");
 
 let run = true;
 
-/*-------------- START QUESTION OBJECT ARRAYS -----------------*/
-
-// questions for promptMainMenu() function
-const arrObjMainMenuQuestions = 
-[
-    {
-        type: "list",
-        message: "What would you like to do?",
-        choices: ["View all departments", "View all roles", "View all employees", "Add a new department", "Add a new role", "Add a new employee", "Update employee role", "End program"],
-        name: "mainMenuChoice"
-    }
-];
-
-// questions for promptAddDepartment() function
-const arrObjAddDepartmentQuestions = [{}];
-
-// questions for promptAddRole() function
-const arrObjAddRoleQuestions = [{}];
-
-// questions for promptAddEmployee() function
-const arrObjAddEmployeeQuestions = [{}];
-
-// questions for promptUpdateEmployeeRole() function
-const arrObjUpdateEmployeeRoleQuestions = [{}]
-
-/*-------------- END QUESTION OBJECT ARRAYS -------------------*/
-
 
 /*------------ START INQUIRER FUNCTIONS ------------------*/
-
 
 // START init function - no args - loops until use ends program
 function init(){
@@ -102,6 +75,25 @@ function init(){
 }
 // END init function
 
+// START getTitleAscii function - returns EMPLOYEE MANAGER ASCII art
+function getTitleAscii() {
+    
+    const strTitleAscii = 
+    `
+     ______                 _                         __  __                                   
+    |  ____|               | |                       |  \\/  |                                  
+    | |__   _ __ ___  _ __ | | ___  _   _  ___  ___  | \\  / | __ _ _ __   __ _  __ _  ___ _ __ 
+    |  __| | _  _  |  _  \\ |/ _    | | | |/ _ \\/ _ \\ | |\\/| |/ _  |  _   / _  |/ _  |/ _ \\ '__|
+    | |____| | | | | | |_) | | (_) | |_| |  __/  __/ | |  | | (_| | | | | (_| | (_| |  __/ |   
+    |______|_| |_| |_| .__/|_|\\___/ \\__, |\\___|\\___| |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|   
+                     | |             __/ |                                      __/ |          
+                     |_|            |___/                                      |___/           `
+
+    return strTitleAscii;
+
+}
+// END getTitleAscii function
+
 // START promptMainMenu function - prompt for commands
 function promptMainMenu(){
 
@@ -109,7 +101,7 @@ function promptMainMenu(){
     const promise = new Promise(function(resolve, reject){
 
         // call inquirer and prompt with main menu questions
-        inquirer.prompt(arrObjMainMenuQuestions)
+        inquirer.prompt(questions.mainMenuQuestions)
 
         // START main menu prompt callback
         .then(function(mainMenuChoice){
@@ -152,25 +144,6 @@ function promptUpdateEmployeeRole(){
 
 }
 // END promptUpdateEmployeeRole function
-
-// START getTitleAscii function - returns EMPLOYEE MANAGER ASCII art
-function getTitleAscii() {
-    
-    const strTitleAscii = 
-    `
-     ______                 _                         __  __                                   
-    |  ____|               | |                       |  \\/  |                                  
-    | |__   _ __ ___  _ __ | | ___  _   _  ___  ___  | \\  / | __ _ _ __   __ _  __ _  ___ _ __ 
-    |  __| | _  _  |  _  \\ |/ _    | | | |/ _ \\/ _ \\ | |\\/| |/ _  |  _   / _  |/ _  |/ _ \\ '__|
-    | |____| | | | | | |_) | | (_) | |_| |  __/  __/ | |  | | (_| | | | | (_| | (_| |  __/ |   
-    |______|_| |_| |_| .__/|_|\\___/ \\__, |\\___|\\___| |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|   
-                     | |             __/ |                                      __/ |          
-                     |_|            |___/                                      |___/           `
-
-    return strTitleAscii;
-
-}
-// END getTitleAscii function
 
 /*------------ END INQUIRER FUNCTIONS ------------------*/
 
