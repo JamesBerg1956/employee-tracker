@@ -11,7 +11,15 @@ sql.connectToDb();
 /*-------------- START QUESTION OBJECT ARRAYS -----------------*/
 
 // questions for promptMainMenu() function
-const arrObjMainMenuQuestions = [{}];
+const arrObjMainMenuQuestions = 
+[
+    {
+        type: "list",
+        message: "What would you like to do?",
+        choices: ["View all departments", "View all roles", "View all employees", "Add a new department", "Add a new role", "Add a new employee", "Update employee role"],
+        name: "mainMenuChoice"
+    }
+];
 
 // questions for promptAddDepartment() function
 const arrObjAddDepartmentQuestions = [{}];
@@ -29,7 +37,9 @@ const arrObjUpdateEmployeeRoleQuestions = [{}]
 
 
 /*------------ START INQUIRER FUNCTIONS ------------------*/
+
 promptMainMenu();
+
 // START promptMainMenu function - prompt for commands
 function promptMainMenu(){
 
