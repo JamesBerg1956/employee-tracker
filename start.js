@@ -11,51 +11,53 @@ sql.connectToDb();
 /*-------------- START QUESTION OBJECT ARRAYS -----------------*/
 
 // questions for promptMainMenu() function
-let arrObjMainMenuQuestions = [{}];
+const arrObjMainMenuQuestions = [{}];
 
 // questions for promptAddDepartment() function
-let arrObjAddDepartmentQuestions = [{}];
+const arrObjAddDepartmentQuestions = [{}];
 
 // questions for promptAddRole() function
-let arrObjAddRoleQuestions = [{}];
+const arrObjAddRoleQuestions = [{}];
 
 // questions for promptAddEmployee() function
-let arrObjAddEmployeeQuestions = [{}];
+const arrObjAddEmployeeQuestions = [{}];
 
 // questions for promptUpdateEmployeeRole() function
-let arrObjUpdateEmployeeRoleQuestions = [{}]
+const arrObjUpdateEmployeeRoleQuestions = [{}]
 
 /*-------------- END QUESTION OBJECT ARRAYS -------------------*/
 
 
 /*------------ START INQUIRER FUNCTIONS ------------------*/
-
+promptMainMenu();
 // START promptMainMenu function - prompt for commands
-async function promptMainMenu(){
+function promptMainMenu(){
+
+    console.log(getTitleAscii());
 
 }
 // END promptMainMenu function
 
 // START promptAddDepartment function - prompt for department data
-async function promptAddDepartment(){
+function promptAddDepartment(){
 
 }
 // END promptAddDepartment function
 
 // START promptAddRole function - prompt for role data
-async function promptAddRole(){
+function promptAddRole(){
 
 }
 // END promptAddRole
 
 // START promptAddEmployee function - prompt for employee data
-async function promptAddEmployee(){
+function promptAddEmployee(){
 
 }
 // END promptAddEmployee function
 
 // START promptUpdateEmployeeRole function - prompt for update data
-async function promptUpdateEmployeeRole(){
+function promptUpdateEmployeeRole(){
 
 }
 // END promptUpdateEmployeeRole function
@@ -63,6 +65,19 @@ async function promptUpdateEmployeeRole(){
 // START getTitleAscii function - returns EMPLOYEE MANAGER ASCII art
 function getTitleAscii() {
     
+    const strTitleAscii = 
+    `
+     ______                 _                         __  __                                   
+    |  ____|               | |                       |  \/  |                                  
+    | |__   _ __ ___  _ __ | | ___  _   _  ___  ___  | \  / | __ _ _ __   __ _  __ _  ___ _ __ 
+    |  __| | _  _  |  _  \ |/ _    | | | |/ _ \/ _ \ | |\/| |/ _  |  _   / _  |/ _  |/ _ \ '__|
+    | |____| | | | | | |_) | | (_) | |_| |  __/  __/ | |  | | (_| | | | | (_| | (_| |  __/ |   
+    |______|_| |_| |_| .__/|_|\___/ \__, |\___|\___| |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|   
+                     | |             __/ |                                      __/ |          
+                     |_|            |___/                                      |___/           `
+
+    return strTitleAscii;
+
 }
 // END getTitleAscii function
 
