@@ -1,8 +1,9 @@
 // import MySql package
 const mysql = require("mysql");
+const util = require("util");
 
 // create object to store connection properties
-const connection = mysql.createConnection({
+var connection = mysql.createConnection({
     // set host to localhost
     host: "localhost",
     // set username to root
@@ -18,4 +19,6 @@ connection.connect(function(err) {
     console.log("connected as id " + connection.threadId + "\n");
   });
 
-  module.exports = connection;
+connection.query = util.promisify(connection.query);
+
+module.exports = connection;

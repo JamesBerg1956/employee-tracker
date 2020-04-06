@@ -10,12 +10,13 @@ function disconnectSql(){
 // START viewDepartments function - no args
 function viewDepartments(){
 
-    // call promise
+    // call sql
     sql.selectDepartment()
     // START promise callback
     .then(function(result){
 
         // print sql result to console as a table
+        console.log("\n\nViewing all departments ...\n");
         console.table(result);
 
     });
@@ -33,6 +34,7 @@ function viewRoles(){
     .then(function(result){
 
         // print sql result to console as a table
+        console.log("\n\nViewing all roles ...\n");
         console.table(result);
 
     });
@@ -50,6 +52,7 @@ function viewEmployees(){
     .then(function(result){
 
         // print sql result to console as a table
+        console.log("\n\nViewing all employees ...\n");
         console.table(result);
 
     });
@@ -67,6 +70,7 @@ function addDepartment(newDepartment){
     .then(function(result){
         
         // print result from promise - 1 department inserted
+        console.log("1 department inserted ...\n");
         console.log(result);
 
         // print updated table to console
@@ -87,6 +91,7 @@ function addRole(newRole){
     .then(function (result){
 
         // print result from promise - 1 role inserted
+        console.log("1 role inserted ...\n");
         console.log(result);
 
         // print updated table to console
@@ -106,7 +111,8 @@ function addEmployee(newEmployee){
     // START promise callback
     .then(function (result){
 
-        // print result from promise - 1 role inserted
+        // print result from promise - 1 employee inserted
+        console.log("1 employee inserted ...\n");
         console.log(result);
 
         // print updated table to console
@@ -127,6 +133,7 @@ function updateEmployeeRole(RoleIdId){
     .then(function (result){
 
         // print result from promise - 1 employee updated
+        console.log("1 employee updated ...\n");
         console.log(result);
 
         // print updated table to console
