@@ -1,12 +1,6 @@
 // import queries package
-const Sql = require("./queries.js");
+const sql = require("./db.js");
 const inquirer = require("inquirer");
-
-// create instance of Sql class
-const sql = new Sql();
-
-// connect to employee_tracker_db database
-sql.connectToDb();
 
 let run = true;
 
@@ -40,8 +34,6 @@ const arrObjUpdateEmployeeRoleQuestions = [{}]
 
 /*------------ START INQUIRER FUNCTIONS ------------------*/
 
-// start program
-init();
 
 // START init function - no args - loops until use ends program
 function init(){
@@ -94,7 +86,8 @@ function init(){
                 case "End program":
                     // set run to false
                     run = false;
-                    // TODO: disconnect from SQL
+                    // disconnect from sql
+
                 break;
 
             }
@@ -123,7 +116,7 @@ function promptMainMenu(){
 
             // save user choice in promise resolve object
             resolve(mainMenuChoice);
-
+            sql.connection.end();
         });
         // END main menu prompt callback
 
@@ -353,4 +346,7 @@ function updateEmployeeRole(RoleIdId){
 ////// END UPDATE FUNCTIONS ////////
 
 /*------------- END FETCH SQL FUNCTIONS ----------------*/
+
+// start program
+init();
 
