@@ -1,7 +1,7 @@
 // import queries package
 const sql = require("./db.js");
-const questions = require("./questions.js")
-const inquirer = require("inquirer");
+// import inquirer prompts
+const prompt = require("./prompt.js");
 
 let run = true;
 
@@ -14,14 +14,11 @@ function init(){
     // print title screen
     console.log(getTitleAscii());
 
-    // get promise to prompt main menu
-    const mainMenuPromise = promptMainMenu();
-
     // START loop
     //while (run) {
         
         // call promise and prompt main menu
-        mainMenuPromise
+        prompt.mainMenu()
         // START main menu promise callback
         .then(function(result){
             console.log(result.mainMenuChoice);
@@ -60,7 +57,7 @@ function init(){
                     // set run to false
                     run = false;
                     // disconnect from sql
-
+                    sql.connection.end();
                 break;
 
             }
@@ -76,8 +73,7 @@ function init(){
 // END init function
 
 // START getTitleAscii function - returns EMPLOYEE MANAGER ASCII art
-function getTitleAscii() {
-    
+function getTitleAscii() {  
     const strTitleAscii = 
     `
      ______                 _                         __  __                                   
@@ -88,64 +84,9 @@ function getTitleAscii() {
     |______|_| |_| |_| .__/|_|\\___/ \\__, |\\___|\\___| |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|   
                      | |             __/ |                                      __/ |          
                      |_|            |___/                                      |___/           `
-
     return strTitleAscii;
-
 }
 // END getTitleAscii function
-
-// START promptMainMenu function - prompt for commands
-function promptMainMenu(){
-
-    // START promise to perform async operations
-    const promise = new Promise(function(resolve, reject){
-
-        // call inquirer and prompt with main menu questions
-        inquirer.prompt(questions.mainMenuQuestions)
-
-        // START main menu prompt callback
-        .then(function(mainMenuChoice){
-
-            // save user choice in promise resolve object
-            resolve(mainMenuChoice);
-            sql.connection.end();
-        });
-        // END main menu prompt callback
-
-    });
-    // END promise to perform async operations
-
-    // return promise
-    return promise;
-
-}
-// END promptMainMenu function
-
-// START promptAddDepartment function - prompt for department data
-function promptAddDepartment(){
-
-}
-// END promptAddDepartment function
-
-// START promptAddRole function - prompt for role data
-function promptAddRole(){
-
-}
-// END promptAddRole
-
-// START promptAddEmployee function - prompt for employee data
-function promptAddEmployee(){
-
-}
-// END promptAddEmployee function
-
-// START promptUpdateEmployeeRole function - prompt for update data
-function promptUpdateEmployeeRole(){
-
-}
-// END promptUpdateEmployeeRole function
-
-/*------------ END INQUIRER FUNCTIONS ------------------*/
 
 
 /*------------- START FETCH SQL FUNCTIONS ----------------*/
