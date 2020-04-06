@@ -8,6 +8,8 @@ const sql = new Sql();
 // connect to employee_tracker_db database
 sql.connectToDb();
 
+let run = true;
+
 /*-------------- START QUESTION OBJECT ARRAYS -----------------*/
 
 // questions for promptMainMenu() function
@@ -16,7 +18,7 @@ const arrObjMainMenuQuestions =
     {
         type: "list",
         message: "What would you like to do?",
-        choices: ["View all departments", "View all roles", "View all employees", "Add a new department", "Add a new role", "Add a new employee", "Update employee role"],
+        choices: ["View all departments", "View all roles", "View all employees", "Add a new department", "Add a new role", "Add a new employee", "Update employee role", "End program"],
         name: "mainMenuChoice"
     }
 ];
@@ -38,12 +40,98 @@ const arrObjUpdateEmployeeRoleQuestions = [{}]
 
 /*------------ START INQUIRER FUNCTIONS ------------------*/
 
-promptMainMenu();
+// start program
+init();
+
+// START init function - no args - loops until use ends program
+function init(){
+
+    // print title screen
+    console.log(getTitleAscii());
+
+    // get promise to prompt main menu
+    const mainMenuPromise = promptMainMenu();
+
+    // START loop
+    //while (run) {
+        
+        // call promise and prompt main menu
+        mainMenuPromise
+        // START main menu promise callback
+        .then(function(result){
+            console.log(result.mainMenuChoice);
+            // START switch choose next action based on main menu choice
+            switch (result.mainMenuChoice){
+
+                case "View all departments":
+                    console.log("Selected View all departments");
+                break;
+
+                case "View all roles":
+                    console.log("Selected View all roles");
+                break;
+
+                case "View all employees":
+                    console.log("Selected View all employees");
+                break;
+
+                case "Add a new department":
+                    console.log("Selected Add a new department");
+                break;
+
+                case "Add a new role":
+                    console.log("Selected Add a new role");
+                break;
+
+                case "Add a new employee":
+                    console.log("Selected Add a new employee");
+                break;
+
+                case "Update employee role":
+                    console.log("Selected Update employee role");
+                break;
+
+                case "End program":
+                    // set run to false
+                    run = false;
+                    // TODO: disconnect from SQL
+                break;
+
+            }
+            // END switch choose next action based on main menu choice
+
+        });
+        // END main menu promise callback
+
+    //}
+    // END loop
+
+}
+// END init function
 
 // START promptMainMenu function - prompt for commands
 function promptMainMenu(){
 
-    console.log(getTitleAscii());
+    // START promise to perform async operations
+    const promise = new Promise(function(resolve, reject){
+
+        // call inquirer and prompt with main menu questions
+        inquirer.prompt(arrObjMainMenuQuestions)
+
+        // START main menu prompt callback
+        .then(function(mainMenuChoice){
+
+            // save user choice in promise resolve object
+            resolve(mainMenuChoice);
+
+        });
+        // END main menu prompt callback
+
+    });
+    // END promise to perform async operations
+
+    // return promise
+    return promise;
 
 }
 // END promptMainMenu function
@@ -78,11 +166,11 @@ function getTitleAscii() {
     const strTitleAscii = 
     `
      ______                 _                         __  __                                   
-    |  ____|               | |                       |  \/  |                                  
-    | |__   _ __ ___  _ __ | | ___  _   _  ___  ___  | \  / | __ _ _ __   __ _  __ _  ___ _ __ 
-    |  __| | _  _  |  _  \ |/ _    | | | |/ _ \/ _ \ | |\/| |/ _  |  _   / _  |/ _  |/ _ \ '__|
+    |  ____|               | |                       |  \\/  |                                  
+    | |__   _ __ ___  _ __ | | ___  _   _  ___  ___  | \\  / | __ _ _ __   __ _  __ _  ___ _ __ 
+    |  __| | _  _  |  _  \\ |/ _    | | | |/ _ \\/ _ \\ | |\\/| |/ _  |  _   / _  |/ _  |/ _ \\ '__|
     | |____| | | | | | |_) | | (_) | |_| |  __/  __/ | |  | | (_| | | | | (_| | (_| |  __/ |   
-    |______|_| |_| |_| .__/|_|\___/ \__, |\___|\___| |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|   
+    |______|_| |_| |_| .__/|_|\\___/ \\__, |\\___|\\___| |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|   
                      | |             __/ |                                      __/ |          
                      |_|            |___/                                      |___/           `
 
@@ -102,7 +190,7 @@ function getTitleAscii() {
 function viewDepartments(){
     
     // get promise to call sql
-    var selectDepartmentsPromise = sql.selectDepartment();
+    const selectDepartmentsPromise = sql.selectDepartment();
 
     // call promise
     selectDepartmentsPromise
@@ -124,7 +212,7 @@ function viewDepartments(){
 function viewRoles(){
 
     // get promise to call sql
-    var selectRolesPromise = sql.selectRole();
+    const selectRolesPromise = sql.selectRole();
 
     // call promise
     selectRolesPromise
@@ -145,7 +233,7 @@ function viewRoles(){
 function viewEmployees(){
 
     // get promise to call sql
-    var selectEmployeePromise = sql.selectEmployee();
+    const selectEmployeePromise = sql.selectEmployee();
 
     // call promise
     selectEmployeePromise
@@ -170,7 +258,7 @@ function viewEmployees(){
 function addDepartment(newDepartment){
     
     // get promise to call sql
-    var addDepartmentPromise = sql.insertDepartment(newDepartment);
+    const addDepartmentPromise = sql.insertDepartment(newDepartment);
             
     // call promise
     addDepartmentPromise
