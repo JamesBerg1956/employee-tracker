@@ -40,17 +40,19 @@ Sql.prototype.connectToDb = function(){
 };
 // END connectToDb function
 
+// TODO: add disconnect sql function to Sql.prototype
+
 // START insertDepartment function - [{name:string}]
 Sql.prototype.insertDepartment = function(department){
      
     // START promise to perform async operations
-    var promise = new Promise(function(resolve, reject){
+    const promise = new Promise(function(resolve, reject){
 
         // notify console that insert is occurring
         console.log("Inserting a new department... \n");
 
         //create query object
-        var query = connection.query(
+        const query = connection.query(
 
         // define parameterized query
         "INSERT INTO department SET ?", department,
@@ -80,13 +82,13 @@ Sql.prototype.insertDepartment = function(department){
 Sql.prototype.insertRole = function(role){
 
     // START promise to perform async operations
-    var promise = new Promise(function(resolve, reject){
+    const promise = new Promise(function(resolve, reject){
 
         // notify console that insert is occurring
         console.log("Inserting a new role... \n");
 
         //create query object
-        var query = connection.query(
+        const query = connection.query(
 
         // define parameterized query
         "INSERT INTO role SET ?", role,
@@ -116,13 +118,13 @@ Sql.prototype.insertRole = function(role){
 Sql.prototype.insertEmployee = function(employee){
     
     // START promise to perform async operations
-    var promise = new Promise(function(resolve, reject){
+    const promise = new Promise(function(resolve, reject){
 
         // notify console that insert is occurring
         console.log("Inserting a new employee... \n");
 
         //create query object
-        var query = connection.query(
+        const query = connection.query(
 
         // define parameterized query
         "INSERT INTO employee SET ?", employee,
@@ -152,13 +154,13 @@ Sql.prototype.insertEmployee = function(employee){
 Sql.prototype.setEmployeeRole = function(RoleIdId){
 
     // START promise to perform async operations
-    var promise = new Promise(function(resolve, reject){
+    const promise = new Promise(function(resolve, reject){
 
         // notify console that select is occurring
         console.log("Updating employee... \n");
 
         // create query object
-        var query = connection.query(
+        const query = connection.query(
 
         // define query ?  ? = [{role_id: int}, {id: int}]
         "UPDATE employee SET ? WHERE ?", RoleIdId,
@@ -187,13 +189,13 @@ Sql.prototype.setEmployeeRole = function(RoleIdId){
 Sql.prototype.selectDepartment = function(){
 
     // START promise to perform async operations
-    var promise = new Promise(function(resolve, reject){
+    const promise = new Promise(function(resolve, reject){
 
         // notify console that select is occurring
         console.log("Selecting all departments... \n");
 
         //create query object
-        var query = connection.query(
+        const query = connection.query(
         
         // define query
         "SELECT name FROM department", 
@@ -223,13 +225,13 @@ Sql.prototype.selectDepartment = function(){
 Sql.prototype.selectRole = function(){
 
     // START promise to perform async operations
-    var promise = new Promise(function(resolve, reject){
+    const promise = new Promise(function(resolve, reject){
 
         // notify console that select is occurring
         console.log("Selecting all roles... \n");
 
         //create query object
-        var query = connection.query(
+        const query = connection.query(
         
         // define query
         "SELECT title, salary, department.name as department FROM role INNER JOIN department ON role.department_id = department.id", 
@@ -259,13 +261,13 @@ Sql.prototype.selectRole = function(){
 Sql.prototype.selectEmployee = function(){
 
     // START promise to perform async operations
-    var promise = new Promise(function(resolve, reject){
+    const promise = new Promise(function(resolve, reject){
 
         // notify console that select is occurring
         console.log("Selecting all employees... \n");
 
         //create query object
-        var query = connection.query(
+        const query = connection.query(
         
         // define query
         "SELECT emp.first_name, emp.last_name, rl.title as 'role', CONCAT(mng.first_name, ' ', mng.last_name) as 'Manager' FROM employee as emp INNER JOIN role as rl ON emp.role_id = rl.id INNER JOIN employee as mng ON emp.manager_id = mng.id", 
