@@ -11,7 +11,7 @@ class Sql {
 Sql.prototype.selectDepartment = function(){ 
 
     //return query object
-    return this.connection.query("SELECT name FROM department");
+    return this.connection.query("SELECT id, name FROM department");
 
 }
 // END selectDepartment function

@@ -47,6 +47,20 @@ function promptAddDepartment(){
 // START promptAddRole function - prompt for role data
 function promptAddRole(){
 
+    return new Promise(function(resolve, reject){
+
+        questions.generateAddRoleQuestions()
+        .then(async function(addRoleQuestions){
+
+            inquirer.prompt(addRoleQuestions)
+            .then(function(addRoleAnswers){
+                resolve(addRoleAnswers);
+            });
+
+        });
+
+    });
+
 }
 // END promptAddRole
 

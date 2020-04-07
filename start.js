@@ -16,7 +16,7 @@ async function init(){
         // call promise and prompt main menu
         await prompt.mainMenu()
         // START main menu promise callback
-        .then(function(result){
+        .then(async function(result){
             console.log(result.mainMenuChoice);
             // START switch choose next action based on main menu choice
             switch (result.mainMenuChoice){
@@ -38,7 +38,7 @@ async function init(){
 
                 case "Add a new department":
                     // prompt user for department info
-                    prompt.promptAddDepartment()
+                    await prompt.promptAddDepartment()
                     // promit callback function
                     .then(function(result){
                         // call sql with object array created from selected department name
@@ -47,7 +47,12 @@ async function init(){
                 break;
 
                 case "Add a new role":
-                    console.log("Selected Add a new role");
+                    
+                    await prompt.promptAddRole()
+                    .then(function(result){
+                        // TODO: call command.addRole(result)
+                        command.addRole(result);
+                    });
                 break;
 
                 case "Add a new employee":
