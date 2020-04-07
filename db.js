@@ -20,7 +20,7 @@ Sql.prototype.selectDepartment = function(){
 Sql.prototype.selectRole = function(){
 
     //return query object
-    return this.connection.query("SELECT title, salary, department.name as department FROM role INNER JOIN department ON role.department_id = department.id");
+    return this.connection.query("SELECT role.id, role.title, role.salary, department.name as department FROM role INNER JOIN department ON role.department_id = department.id");
 
 }
 // END selectRole function
@@ -29,7 +29,7 @@ Sql.prototype.selectRole = function(){
 Sql.prototype.selectEmployee = function(){
 
     //return query object
-    return this.connection.query("SELECT emp.first_name, emp.last_name, rl.title as 'role', CONCAT(mng.first_name, ' ', mng.last_name) as 'Manager' FROM employee as emp INNER JOIN role as rl ON emp.role_id = rl.id INNER JOIN employee as mng ON emp.manager_id = mng.id");
+    return this.connection.query("SELECT emp.id, CONCAT(emp.first_name, ' ', emp.last_name) as 'name', rl.title as 'role', CONCAT(mng.first_name, ' ', mng.last_name) as 'manager' FROM employee as emp INNER JOIN role as rl ON emp.role_id = rl.id LEFT JOIN employee as mng ON emp.manager_id = mng.id");
   
 }
 // END selectEmployee function
@@ -56,7 +56,7 @@ Sql.prototype.insertRole = function(role){
 Sql.prototype.insertEmployee = function(employee){
     
     //create query object
-    this.connection.query("INSERT INTO employee SET ?", employee);
+    return this.connection.query("INSERT INTO employee SET ?", employee);
 
 }
 // END insertEmployee function

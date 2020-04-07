@@ -1,5 +1,6 @@
 const questions = require("./questions.js")
 const inquirer = require("inquirer");
+const sql = require("./db.js");
 
 // START promptMainMenu function - prompt for commands
 function mainMenu(){
@@ -66,6 +67,25 @@ function promptAddRole(){
 
 // START promptAddEmployee function - prompt for employee data
 function promptAddEmployee(){
+
+    return new Promise(function(resolve, reject){
+
+        sql.selectEmployee()
+        .then(async function(employees){
+
+            questions.generateAddEmployeeQuestions(employees)
+            .then(async function(addEmployeeQuestions){
+                
+                inquirer.prompt(addEmployeeQuestions)
+                .then(function(addEmployeeAnswers){
+                    resolve(addEmployeeAnswers);
+                });
+
+            });
+
+        })
+
+    });
 
 }
 // END promptAddEmployee function

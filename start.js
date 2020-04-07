@@ -50,13 +50,17 @@ async function init(){
                     
                     await prompt.promptAddRole()
                     .then(function(result){
-                        // TODO: call command.addRole(result)
+                        // call command.addRole(result)
                         command.addRole(result);
                     });
                 break;
 
                 case "Add a new employee":
-                    console.log("Selected Add a new employee");
+                    await prompt.promptAddEmployee()
+                    .then(function(result){
+                        // call command.addEmployee(result)
+                        command.addEmployee(result);
+                    });
                 break;
 
                 case "Update employee role":

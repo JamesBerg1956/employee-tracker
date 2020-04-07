@@ -17,7 +17,7 @@ function viewDepartments(){
     .then(function(result){
 
         // print sql result to console as a table
-        console.log("\n\nViewing all departments ...\n");
+        console.log("\nViewing all departments ...\n");
         console.table(result);
 
     });
@@ -35,7 +35,7 @@ function viewRoles(){
     .then(function(result){
 
         // print sql result to console as a table
-        console.log("\n\nViewing all roles ...\n");
+        console.log("\nViewing all roles ...\n");
         console.table(result);
 
     });
@@ -53,7 +53,7 @@ function viewEmployees(){
     .then(function(result){
 
         // print sql result to console as a table
-        console.log("\n\nViewing all employees ...\n");
+        console.log("\nViewing all employees ...\n");
         console.table(result);
 
     });
@@ -71,7 +71,7 @@ function addDepartment(newDepartment){
     .then(function(result){
         
         // print result from promise - 1 department inserted
-        console.log("\n\n1 department inserted ...\n");
+        console.log("\n1 department inserted ...\n");
 
         // print updated table to console
         viewDepartments();
@@ -91,7 +91,7 @@ function addRole(newRole){
     .then(function (result){
 
         // print result from promise - 1 role inserted
-        console.log("\n\n1 role inserted ...\n");
+        console.log("\n1 role inserted ...\n");
 
         // print updated table to console
         viewRoles();
@@ -111,7 +111,7 @@ function addEmployee(newEmployee){
     .then(function (result){
 
         // print result from promise - 1 employee inserted
-        console.log("\n\n1 employee inserted ...\n");
+        console.log("\n1 employee inserted ...\n");
 
         // print updated table to console
         viewEmployees();
@@ -131,7 +131,7 @@ function updateEmployeeRole(RoleIdId){
     .then(function (result){
 
         // print result from promise - 1 employee updated
-        console.log("\n\n1 employee updated ...\n");
+        console.log("\n1 employee updated ...\n");
 
         // print updated table to console
         viewEmployees();
