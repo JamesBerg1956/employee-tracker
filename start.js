@@ -22,15 +22,15 @@ async function init(){
             switch (result.mainMenuChoice){
 
                 case "View all departments":
-                    console.log("Selected View all departments");
+                   command.viewDepartments();
                 break;
 
                 case "View all roles":
-                    console.log("Selected View all roles");
+                    command.viewRoles();
                 break;
 
                 case "View all employees":
-                    console.log("Selected View all employees");
+                    command.viewEmployees();
                 break;
 
                 case "Add a new department":
@@ -83,7 +83,6 @@ function getTitleAscii() {
     return strTitleAscii;
 }
 // END getTitleAscii function
-
 
 // start program
 init();
