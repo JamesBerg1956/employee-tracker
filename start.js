@@ -22,19 +22,28 @@ async function init(){
             switch (result.mainMenuChoice){
 
                 case "View all departments":
-                   command.viewDepartments();
+                    // print all departments to console
+                    command.viewDepartments();
                 break;
 
                 case "View all roles":
+                    // print all departments to console
                     command.viewRoles();
                 break;
 
                 case "View all employees":
+                    // print all employees to console
                     command.viewEmployees();
                 break;
 
                 case "Add a new department":
-                    console.log("Selected Add a new department");
+                    // prompt user for department info
+                    prompt.promptAddDepartment()
+                    // promit callback function
+                    .then(function(result){
+                        // call sql with object array created from selected department name
+                        command.addDepartment([{name: result.departmentName}]);
+                    });
                 break;
 
                 case "Add a new role":

@@ -5,57 +5,67 @@ const inquirer = require("inquirer");
 function mainMenu(){
 
     // START promise to perform async operations
-    const promise = new Promise(function(resolve, reject){
+    return new Promise(function(resolve, reject){
 
         // call inquirer and prompt with main menu questions
         inquirer.prompt(questions.mainMenuQuestions)
 
         // START main menu prompt callback
         .then(function(mainMenuChoice){
-
             // save user choice in promise resolve object
             resolve(mainMenuChoice);
-            
         });
         // END main menu prompt callback
 
     });
     // END promise to perform async operations
 
-    // return promise
-    return promise;
-
 }
 // END promptMainMenu function
 
 // START promptAddDepartment function - prompt for department data
-function addDepartment(){
+function promptAddDepartment(){
+
+    // START promise to perform async operations
+    return new Promise(function(resolve, reject){
+        
+        // call inquirer and prompt with main menu questions
+        inquirer.prompt(questions.addDepartmentQuestions)
+
+        // START main menu prompt callback
+        .then(function(departmentName){
+            resolve(departmentName);
+        });
+        // END main menu prompt callback
+
+    });
+    // END promise to perform async operations
 
 }
 // END promptAddDepartment function
 
 // START promptAddRole function - prompt for role data
-function addRole(){
+function promptAddRole(){
 
 }
 // END promptAddRole
 
 // START promptAddEmployee function - prompt for employee data
-function addEmployee(){
+function promptAddEmployee(){
 
 }
 // END promptAddEmployee function
 
 // START promptUpdateEmployeeRole function - prompt for update data
-function updateEmployeeRole(){
+function promptUpdateEmployeeRole(){
 
 }
 // END promptUpdateEmployeeRole function
 
 module.exports = {
     mainMenu: mainMenu,
-    addDepartment: addDepartment,
-    addRole: addRole,
-    addEmployee: addEmployee,
-    updateEmployeeRole: updateEmployeeRole
+    promptAddDepartment: promptAddDepartment,
+    promptAddRole: promptAddRole,
+    promptAddEmployee: promptAddEmployee,
+    promptUpdateEmployeeRole: promptUpdateEmployeeRole
 }
