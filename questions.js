@@ -10,7 +10,14 @@ const mainMenuQuestions =
 ];
 
 // questions for promptAddDepartment() function
-const addDepartmentQuestions = [{}];
+const addDepartmentQuestions = 
+[
+    {
+        type: "input",
+        message: "Enter the name of the new department",
+        name: "departmentName"
+    }
+];
 
 // questions for promptAddRole() function
 const addRoleQuestions = [{}];
