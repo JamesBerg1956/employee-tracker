@@ -1,3 +1,5 @@
+const sql = require("./db.js");
+
 // questions for promptMainMenu() function
 const mainMenuQuestions = 
 [
@@ -19,8 +21,64 @@ const addDepartmentQuestions =
     }
 ];
 
-// questions for promptAddRole() function
-const addRoleQuestions = [{}];
+// START generateAddRoleQuestions
+function generateAddRoleQuestions (departments){
+    
+    return new Promise(function(resolve, reject){
+
+        sql.selectDepartment()
+        .then(function(departments){
+            
+            const addRoleQuestions = [];
+
+            addRoleQuestions.push(
+                {
+                    type: "input",
+                    message: "Enter the name of the new role",
+                    name: "title"
+                }
+            );
+
+            addRoleQuestions.push(
+                {
+                    type: "input",
+                    message: "Enter the salary of the role",
+                    name: "salary"
+                }
+            );
+
+            const departmentNames = [];
+            const departmentIds = [];
+
+            for (let i = 0; i < departments.length; i++) {
+                
+                const dept = departments[i];
+                departmentNames.push(dept.name);
+                departmentIds.push(dept.id);
+
+            }
+
+            addRoleQuestions.push(
+                {
+                    type: "list",
+                    message: "Select which department the role is associated with",
+                    choices: departmentNames,
+                    filter: function(val){
+                        return departmentIds[departmentNames.indexOf(val)];
+                    },
+                    name: "department_id"
+                }
+            );
+
+            resolve(addRoleQuestions);
+
+        });
+        
+    });
+
+}
+
+// END generateAddRoleQuestions
 
 // questions for promptAddEmployee() function
 const addEmployeeQuestions = [{}];
@@ -31,7 +89,7 @@ const updateEmployeeRoleQuestions = [{}]
 module.exports = {
     mainMenuQuestions: mainMenuQuestions,
     addDepartmentQuestions: addDepartmentQuestions,
-    addRoleQuestions: addRoleQuestions,
     addEmployeeQuestions: addEmployeeQuestions,
-    updateEmployeeRoleQuestions: updateEmployeeRoleQuestions
+    updateEmployeeRoleQuestions: updateEmployeeRoleQuestions,
+    generateAddRoleQuestions: generateAddRoleQuestions
 }
