@@ -1,5 +1,6 @@
 // import queries package
 const sql = require("./db.js");
+const cTable = require("console.table");
 
 // START disconnectSql function - no args
 function disconnectSql(){
@@ -70,8 +71,7 @@ function addDepartment(newDepartment){
     .then(function(result){
         
         // print result from promise - 1 department inserted
-        console.log("1 department inserted ...\n");
-        console.log(result);
+        console.log("\n\n1 department inserted ...\n");
 
         // print updated table to console
         viewDepartments();
@@ -91,8 +91,7 @@ function addRole(newRole){
     .then(function (result){
 
         // print result from promise - 1 role inserted
-        console.log("1 role inserted ...\n");
-        console.log(result);
+        console.log("\n\n1 role inserted ...\n");
 
         // print updated table to console
         viewRoles();
@@ -112,8 +111,7 @@ function addEmployee(newEmployee){
     .then(function (result){
 
         // print result from promise - 1 employee inserted
-        console.log("1 employee inserted ...\n");
-        console.log(result);
+        console.log("\n\n1 employee inserted ...\n");
 
         // print updated table to console
         viewEmployees();
@@ -133,8 +131,7 @@ function updateEmployeeRole(RoleIdId){
     .then(function (result){
 
         // print result from promise - 1 employee updated
-        console.log("1 employee updated ...\n");
-        console.log(result);
+        console.log("\n\n1 employee updated ...\n");
 
         // print updated table to console
         viewEmployees();
