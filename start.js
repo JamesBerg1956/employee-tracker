@@ -64,7 +64,11 @@ async function init(){
                 break;
 
                 case "Update employee role":
-                    console.log("Selected Update employee role");
+                    await prompt.promptUpdateEmployeeRole()
+                    .then(function(result){
+                        // call command.updateEmployeeRole(result)
+                        command.updateEmployeeRole(result);
+                    });
                 break;
 
                 case "End program":

@@ -126,7 +126,7 @@ function addEmployee(newEmployee){
 function updateEmployeeRole(RoleIdId){
 
     // call promise
-    sql.setEmployeeRole()
+    sql.setEmployeeRole(RoleIdId)
     // START promise callback
     .then(function (result){
 
@@ -142,6 +142,7 @@ function updateEmployeeRole(RoleIdId){
 }
 // END updateEmployeeRole function
 
+// export objects and functions
 module.exports = {
     disconnectSql: disconnectSql,
     viewDepartments: viewDepartments,

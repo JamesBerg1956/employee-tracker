@@ -14,11 +14,14 @@ var connection = mysql.createConnection({
     database: "employee_tracker_db"
 });
 
+// establish connection to sql
 connection.connect(function(err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId + "\n");
-  });
+});
 
+// promisify all instances of connection.query
 connection.query = util.promisify(connection.query);
 
+// export connection
 module.exports = connection;
