@@ -65,7 +65,7 @@ Sql.prototype.insertEmployee = function(employee){
 Sql.prototype.setEmployeeRole = function(RoleIdId){
 
     // create query object
-    this.connection.query("UPDATE employee SET ? WHERE ?", RoleIdId);
+    return this.connection.query("UPDATE employee SET ? WHERE ?", RoleIdId);
 
 }
 // END setEmployeeRole function
